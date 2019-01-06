@@ -75,7 +75,7 @@ body {
     grid-row-end: 3;
     background-color: aliceblue;
 }
-#tripleSize {
+#equalSymbol {
     grid-column-start: 4;
     grid-column-end: 5;
     grid-row-start: 3;
