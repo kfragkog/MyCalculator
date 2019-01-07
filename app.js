@@ -3,7 +3,7 @@ let allItems = document.getElementsByClassName("items");
 let resultString = document.getElementById("result").innerText;
 let resultValue = 0;
 let calculationItems = [];
-let calculation = null;
+let calculation = "";
 
 
 for (let i = 0; i < allItems.length; i++) {
@@ -14,25 +14,34 @@ for (let i = 0; i < allItems.length; i++) {
     }
     else if (allItems[i].classList.contains("operators") && allItems[i].id != "equalSymbol") {
         allItems[i].onclick = function(e) {
-            storeValAndCal(allItems[i]);
-            console.log("b", calculation, calculationItems)    
+            calculate();
+            calculation = document.getElementById(allItems[i].id).innerText;
+            resultString = "";
+            resultValue = 0;
+            console.log("b", calculation, calculationItems, resultValue)    
         }
     }
     else if (allItems[i].id == "equalSymbol") {
         allItems[i].onclick = function(e) {
-            console.log("=")    
+            calculate();   
+            calculation = ""; //NEEDS FIXING
+            console.log(calculation, calculationItems, resultValue)
         }
     }    
     else if (allItems[i].classList.contains("delete")) {
         allItems[i].onclick = function(e) {
         document.getElementById("result").innerText = "0";
         calculationItems = [];
-        console.log(calculationItems) 
+        resultString = "";
+        resultValue = 0;    
         }    
     }   
     else {
         allItems[i].onclick = function(e) {
-        console.log(".")
+            if (resultString == "") document.getElementById("result").innerText = "0";
+            document.getElementById("result").innerText += allItems[i].innerText;
+            resultString += allItems[i].innerText;
+            resultValue = parseFloat(resultString);
         }        
     }
 }
@@ -46,41 +55,59 @@ function setValue(item) {
 
     document.getElementById("result").innerText += item.innerText;
     resultString += item.innerText;
-    resultValue = parseInt(resultString, 10);
+    resultValue = parseFloat(resultString);
     console.log(resultValue)
 }
 
-function storeValAndCal(item) {
+function calculate(item) {
     calculationItems.push(resultValue);
-    calculation = document.getElementById(item.id).innerText;
     
-    resultString = "";
-    resultValue = 0;
+    if (calculationItems.length == 2) {
+        if (calculation == "+") {
+            resultValue = calculationItems[0] + calculationItems[1];
+        }
+        else if (calculation == "-") {
+            resultValue = calculationItems[0] - calculationItems[1];
+        } 
+        else if (calculation == "×") {
+            resultValue = calculationItems[0] * calculationItems[1];
+        } 
+        else if (calculation == "÷"){
+            resultValue = calculationItems[0] / calculationItems[1];
+        }
+        
+        calculationItems = [];
+        calculationItems.push(resultValue);
+        document.getElementById("result").innerText = resultValue;
+    }
 
-    // if (calculationItems.length = 2) {
-    //     resultValue = calculationItems[0] + calculation + calculationItems[1];
-    // }
+    // calculation = document.getElementById(item.id).innerText;
+    // resultString = "";
+    // resultValue = 0;
 }
 
-
-
-
-
-// document.getElementsByClassName("num")[0].onclick = function(e) {
-//     console.log(e.target)
-//     let childIndex = getChildIndex(e.target);
-//     let resultValue = document.getElementById("result").innerText;
-//     // resultValue = 
-// }
-
-// var getChildIndex = function(child) {
-//     var parent = child.parentElement;
-//     var children = parent.children;
-//     var i = children.length - 1;
-//     for (; i >= 0; i--){
-//         if (child == children[i]){
-//             break;
+// function equalCal() {
+//     calculationItems.push(resultValue);
+    
+//     if (calculationItems.length == 2) {
+//         if (calculation == "+") {
+//             resultValue = calculationItems[0] + calculationItems[1];
 //         }
+//         else if (calculation == "-") {
+//             resultValue = calculationItems[0] - calculationItems[1];
+//         } 
+//         else if (calculation == "×") {
+//             resultValue = calculationItems[0] * calculationItems[1];
+//         } 
+//         else {
+//             resultValue = calculationItems[0] / calculationItems[1];
+//         }
+        
+//         calculationItems = [];
+//         calculationItems.push(resultValue);
+//         document.getElementById("result").innerText = resultValue;
 //     }
-//     return i;
+
+//     resultString = "";
+//     resultValue = 0;
 // }

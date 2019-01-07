@@ -13,6 +13,8 @@ body {
     height: 50%;
 }
 
+div { cursor: pointer; }
+
 .container {
     display: grid;
     justify-content: center;
@@ -27,8 +29,28 @@ body {
 .items {
     text-align: center;
     line-height: 47px;
-    border: 0.5px solid rgb(186, 195, 206);
+    border: 0.5px solid rgb(229, 232, 236);
     font-size: 20px;
+}
+
+.operators {
+    background-color: aliceblue;
+}
+
+.items:active {
+    background-color: rgb(240, 240, 234);
+}
+
+.items:hover {
+    border: 2px solid rgb(241, 241, 192);
+}
+
+.operators:active {
+    background-color: rgb(240, 240, 234);
+}
+
+#equalSymbol:active {
+    background-color: rgba(241, 241, 234, 0.856);
 }
 
 .cornerBotL {
@@ -56,24 +78,20 @@ body {
 #secFirst {
     grid-column-start: 1;
     grid-column-end: 2;
-    background-color: aliceblue;
 }
 #secSec {
     grid-column-start: 2;
     grid-column-end: 3;
-    background-color: aliceblue;
 }
 #secThird {
     grid-column-start: 3;
     grid-column-end: 4;
-    background-color: aliceblue;
 }
 #secForth {
     grid-column-start: 4;
     grid-column-end: 5;
     grid-row-start: 2;
     grid-row-end: 3;
-    background-color: aliceblue;
 }
 #equalSymbol {
     grid-column-start: 4;
@@ -102,26 +120,3 @@ body {
     height: 22px;
     margin-left: 5px;
 }
-
-
-
-
-
-
-
-
-
-
-/* FLEX */
-/* .row {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.row div {
-    margin: 30px 30px;
-}
-
-#tripleSize {
-    
-} */
